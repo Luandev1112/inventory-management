@@ -1,0 +1,7 @@
+<% provide(:title, 'All Brands') %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <%= render 'shared/asset_cards', asset_type: 'Brand' , assets: @brands, add_path: new_brand_path %>
+</main>

@@ -1,0 +1,44 @@
+<% if partial_type == 'edit_password' %>
+  <% form_path = updatepassword_user_url %>
+
+<% elsif partial_type == 'edit_user_details' %>
+  <% form_path = user_url @user %>
+  
+<% else %>
+  <% form_path = users_url%>
+<% end %>
+
+<%= form_for(@user, url: form_path) do |f| %>
+  <%= render 'shared/error_messages', object: f.object  %>
+
+  <% if partial_type != 'edit_password' %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mobile_no%>
+      <%= f.text_field :mobile_no, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <% if partial_type != 'edit_user_details' %>
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <%= f.submit submit_text, class: "btn btn-primary form-control" %>
+<% end %>

@@ -1,0 +1,8 @@
+Hi <%= @user.name %>,
+
+An issue reported by you, <strong> ISE#<%= @issue.id %> </strong> on item <strong> <%= item_display_name(get_item_by_id(@issue.item_id)) %> </strong> has been solved.
+
+Check your issue's feedback and other details at the link here : <%= link_to "ISE##{@issue.id}", @issue %>
+
+Thanks,
+Henlo IMS.

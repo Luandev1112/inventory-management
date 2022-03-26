@@ -1,0 +1,52 @@
+<% provide(:title, "Item's Allotment history") %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <% if @allotments.blank? %>
+    <div>
+      The item has not been alloted to any user yet.
+    </div>
+
+  <% else %>
+    <table class="table">
+      <tr>
+        <th>
+          User
+        </th>
+
+        <th>
+          Alloted at
+        </th>
+
+        <th>
+          Allotment quantity
+        </th>
+
+        <th>
+          Dealloted at
+        </th>
+      </tr>
+
+      <% @allotments.each do |allotment| %>
+        <tr>
+          <td>
+            <%= get_user_name_by_id allotment.user_id %>
+          </td>
+
+          <td>
+            <%= allotment.created_at %>
+          </td>
+
+          <td class="count">
+            <%= allotment.allotment_quantity %>
+          </td>
+
+          <td>
+            <%= get_deallotment_stats allotment %>
+          </td>
+        </tr>
+      <% end %>
+    <table>
+  <% end %>
+</main>

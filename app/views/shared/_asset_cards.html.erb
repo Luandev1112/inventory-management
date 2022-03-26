@@ -1,0 +1,32 @@
+<% if assets.blank? %>
+  <div>
+    NO <%= asset_type %> has been added as of now.
+  </div>
+
+<% else %>
+  <div class="card-columns">
+    <% assets.each do |asset| %>
+      <div class="card bg-light">
+        <div class="card-body">
+          <h2 class="card-title">
+            <% if asset.instance_of? User %>
+              <%= link_to ((asset == current_user) ? (asset.name + " (You)") : asset.name), asset %>
+
+            <% elsif asset.instance_of? Item %>
+              <%= link_to item_display_name(asset), asset %>
+              
+            <% else %>
+              <%= link_to asset.name, asset %>
+            <% end %>
+          </h2>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if logged_in? && current_user.admin? && defined?(add_path) %>
+  <div class="button-div">
+    <%= link_to "Add New #{asset_type}", add_path, class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>

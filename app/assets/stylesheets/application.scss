@@ -1,0 +1,113 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ $accent-color: #660C00;
+
+ body {
+   background-color: #CFFFDD;
+ }
+
+ header {
+   background-color: $accent-color;
+   text-align: center;
+
+   a {
+     color: #FFFFFF;
+   }
+ }
+
+ a.logo {
+   font-size: 40px;
+ }
+
+ .nav .open .user-menu {
+   background-color: #FFFFFF;
+
+   &.login {
+     padding: 20px;
+   }
+ }
+
+ a.user-dropdown[aria-expanded="true"] {
+   color: #000000;
+ }
+
+ .option-dropdown, .particular {
+   margin: 10px 0;
+ }
+
+ .mobile-view {
+   background-color: #FFFFFF;
+   margin: 10px auto;
+   padding: 10px;
+ }
+
+ label {
+   font-size: 15px;
+ }
+
+ .checkbox.remember-me {
+   margin: 0 0 2px;
+ }
+
+ .card h2 {
+   font-size: 20px;
+ }
+
+ .page-body {
+   background-color: #FFFFFF;
+   margin-top: 100px;
+   margin-bottom: 50px;
+   padding: 20px 40px;
+ }
+
+ .page-title, .form-group {
+   padding-bottom: 10px;
+ }
+
+ .particular-type {
+   font-size: 15px;
+   font-weight: 600;
+   padding: 2px 0;
+ }
+
+ .particular-value {
+   font-size: 16px;
+   padding: 2px 0;
+ }
+
+ .button-div {
+   margin: 10px 0;
+   text-align: center;
+ }
+
+ .select-attribute select {
+   padding: 5px 0;
+   width: 100%;
+ }
+
+ @media (min-width: 768px) {
+   .mobile-view {
+     display: none;
+   }
+
+   .nav .open .user-menu.login {
+     width: 350px;
+   }
+ }

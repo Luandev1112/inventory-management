@@ -1,0 +1,68 @@
+<% unaccessible_attributes = ["id", "created_at", "updated_at", "in_stock", "minimum_required_stock", "procurement_time_in_weeks", "password_digest", "remember_digest", "admin"]
+%>
+
+<section>
+  <% (object.attributes.reject{ |attr| attr.in? unaccessible_attributes }).each do |attribute, value| %>
+    <% if attribute.in? ["issue_description", "dealloted_at"] %>
+      <div class="particular">
+        <div class="particular-type">
+          <% case attribute %>
+            <% when "issue_description" %>
+              Reported at
+            <% when "dealloted_at" %>
+              Alloted at
+          <% end %>
+        </div>
+
+        <div class="particular-value">
+          <%= object.created_at %>
+        </div>
+      </div>
+
+    <% elsif attribute == "solved_at" %>
+      <div class="particular">
+        <div class="particular-type">
+          Solved?
+        </div>
+
+        <div class="particular-value">
+          <%= object.solved_at.nil? ? "No" : "Yes" %>
+        </div>
+      </div>
+
+      <% if object.solved_at.nil? %>
+        <% break %>
+      <% end %>
+    <% end %>
+
+    <div class="particular">
+      <div class="particular-type">
+        <%= attribute.humanize %>
+      </div>
+
+      <div class="particular-value">
+        <% if attribute.include? "brand" %>
+          <%= get_brand_name_by_id value %>
+
+        <% elsif attribute.include? "category" %>
+          <%= get_category_name_by_id value %>
+
+        <% elsif attribute.include? "item" %>
+          <%= (get_item_by_id value).nil? ? "N/A" : item_display_name(get_item_by_id value) %>
+
+        <% elsif attribute.include? "user" %>
+          <%= get_user_name_by_id value %>
+
+        <% elsif attribute.include? "price" %>
+          <%= "Rs. #{value}" %>
+
+        <% elsif value.nil? %>
+          <%= "-- Not Applicable --" %>
+
+        <% else %>
+          <%= value %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</section>

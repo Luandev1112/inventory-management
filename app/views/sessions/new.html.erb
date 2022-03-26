@@ -1,0 +1,19 @@
+<%= form_for(:session, url: login_path) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.check_box :remember_me, class: 'checkbox checkbox-inline remember-me' %>
+    <%= f.label :remember_me, "Remember me on this computer" %>
+  </div>
+
+  <%= f.submit "Log in", class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      <%= full_title(yield(:title)) %>
+    </title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-dark navbar-expand-md navbar-fixed-top" style="background-color: darkblue;">
+      <div class="container">
+        <%= link_to "Inventory System", root_path, class: 'navbar-brand logo' %>
+
+        <button class="navbar-toggler mobile-view" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <%= image_tag("menu.png", alt: "Navigation menu") %>
+        </button>
+
+        <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+              <%= link_to "Brands", brands_path %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "Categories", categories_path %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "Items", items_path %>
+            </li>
+
+            <li class="nav-item">
+              <%= link_to "Users", users_path if logged_in? %>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a href="#" class="dropdown-toggle user-dropdown" data-toggle="dropdown">
+                <% if logged_in? %>
+                  <%= current_user.name %>
+
+                <% else %>
+                  Log in
+                <% end %>
+              </a>
+
+              <ul class="dropdown-menu user-menu <% if !logged_in? %> login <% end %>">
+                <% if logged_in? %>
+                  <li>
+                    <%= link_to "Profile", current_user %>
+                  </li>
+
+                  <li class="nav-item">
+                    <%= link_to (current_user.admin? ? "All" : "My") + " Issues", issues_path if logged_in? %>
+                  </li>
+
+                  <li class="nav-item">
+                    <% if logged_in? %>
+                      <%= link_to "All Allotments", allotments_path if current_user.admin? %>
+                      <%= link_to "My Allotments", currentallotments_user_path(current_user) if !current_user.admin? %>
+                    <% end %>
+                  </li>
+
+                  <li>
+
+                  </li>
+
+                  <li class="divider"></li>
+
+                  <li>
+                    <%= link_to "Log out", logout_path, method: :delete %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= render template: "sessions/new" %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

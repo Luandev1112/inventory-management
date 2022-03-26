@@ -1,0 +1,80 @@
+<% if items.blank? %>
+  <div>
+    NO item has been added as of now.
+  </div>
+
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Item
+        </th>
+
+        <th>
+          Total stock
+        </th>
+
+        <th>
+          Currently in stock
+        </th>
+
+        <th>
+          Minimum Required Stock
+        </th>
+
+        <th>
+          Procurement Time
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% items.each do |item| %>
+        <tr>
+          <td>
+            <div>
+              <%= item_display_name item %>
+            </div>
+            <div class="dropdown option-dropdown">
+              <a href="#" class="nav-link dropdown-toggle user-dropdown border d-inline btn" data-toggle="dropdown">
+                Options
+              </a>
+              <ul class="dropdown-menu user-menu">
+                <li>
+                  <%= link_to "Item Details", item_path(item) %>
+                </li>
+
+                <li>
+                  <%= link_to "Allotment history", allotments_item_path(item) %>
+                </li>
+              </ul>
+            </div>
+          </td>
+
+          <td class="count">
+            <%= item.total_stock %>
+          </td>
+
+          <td class="count">
+            <%= item.in_stock %>
+          </td>
+
+          <td class="count">
+            <%= item.minimum_required_stock %>
+          </td>
+
+          <td class="count">
+            <%= "#{item.procurement_time_in_weeks} weeks" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if current_user.admin? %>
+  <div class="button-div">
+    <%= link_to "Add New Item", new_item_path, class: "btn btn-lg btn-primary"  %>
+  </div>
+<% end %>

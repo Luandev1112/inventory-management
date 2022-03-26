@@ -1,0 +1,91 @@
+<% provide(:title, 'All Allotments') %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <% if @allotments.blank? %>
+    <div>
+      NO allotments have been made as of now.
+    </div>
+
+  <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            User
+          </th>
+
+          <th>
+            Item
+          </th>
+
+          <th>
+            Allotment quantity
+          </th>
+
+          <th>
+            Alloted at
+          </th>
+
+          <th>
+            Dealloted at
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @allotments.each do |allotment| %>
+          <% @item = get_item_by_id allotment.item_id %>
+          <tr>
+            <td>
+              <%= get_user_name_by_id allotment.user_id %>
+            </td>
+
+            <td>
+              <%= item_display_name @item %>
+            </td>
+
+            <td class="count">
+              <%= allotment.allotment_quantity %>
+            </td>
+
+            <td>
+              <%= allotment.created_at %>
+            </td>
+
+            <td>
+              <%= get_deallotment_stats allotment %>
+            </td>
+
+            <td>
+              <% if current_user.admin? && allotment.dealloted_at.nil? %>
+                <div class="dropdown option-dropdown">
+                  <a href="#" class="nav-link dropdown-toggle user-dropdown border d-inline btn" data-toggle="dropdown">
+                    Options
+                  </a>
+
+                  <ul class="dropdown-menu user-menu">
+                    <li>
+                      <%= link_to "Update allotment quantity", edit_allotment_path(allotment) %>
+                    </li>
+
+                    <li>
+                      <%= link_to "Deallot", deallot_allotment_path(allotment) %>
+                    </li>
+                  </ul>
+                </div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <% if current_user.admin? %>
+    <div class="button-div">
+      <%= link_to "New Allotment", new_allotment_path, class: "btn btn-lg btn-primary" %>
+    </div>
+  <% end %>
+</main>

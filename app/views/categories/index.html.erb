@@ -1,0 +1,7 @@
+<% provide(:title, 'All Categories') %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <%= render 'shared/asset_cards', asset_type: 'Category', assets: @categories, add_path: new_category_path %>
+</main>

@@ -1,0 +1,25 @@
+<% provide(:title, "Category Details: #{@category.name}") %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <%= render 'shared/details', object: @category %>
+
+  <% if logged_in? && current_user.admin? %>
+    <div class="dropdown option-dropdown">
+      <a href="#" class="nav-link dropdown-toggle user-dropdown border d-inline btn" data-toggle="dropdown">
+        Options
+      </a>
+
+      <ul class="dropdown-menu user-menu">
+        <li>
+          <%= link_to "Edit Category", edit_category_path %>
+        </li>
+
+        <li>
+          <%= link_to "Delete", @category, method: :delete, data: { confirm: "You sure?" } %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</main>

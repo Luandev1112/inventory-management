@@ -1,0 +1,21 @@
+<main class="home-page page-body">
+  <%= render 'shared/heading' %>
+
+  <section class="jumbotron bg-white">
+    <h1>
+     Inventory Management System
+    </h1>
+
+    <div class="lead">
+      Get your inventory related tasks done here!
+    </div>
+
+    <%= image_tag("inventory.jpg", alt: "Inventory Management System") %>
+
+    <% if !logged_in? %>
+      <div class="button-div">
+        <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+      </div>
+    <% end %>
+  </section>
+</main>

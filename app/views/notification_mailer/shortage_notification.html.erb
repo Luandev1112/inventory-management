@@ -1,0 +1,15 @@
+<p>
+  Hi <%= @user.name %>,
+</p>
+
+<p>
+  The available stock of the item, <strong> <%= item_display_name @item %> </strong> is <strong> <%= @item.in_stock %> </strong> which is <%= (@item.in_stock == @item.minimum_required_stock) ? "equal to" : "below" %> the minimum required stock of the item (<strong> <%= @item.minimum_required_stock %> </strong>). You are adviced to take proper steps to check the quantity of the item.
+</p>
+
+<p>
+  Thanks,
+</p>
+
+<p>
+  Henlo IMS.
+</p>

@@ -1,0 +1,25 @@
+<%= form_for @brand do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :manufacturer %>
+    <%= f.text_field :manufacturer, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :manufacturer_email %>
+    <%= f.email_field :manufacturer_email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :manufacturer_office %>
+    <%= f.text_field :manufacturer_office, class: 'form-control' %>
+  </div>
+
+  <%= f.submit submit_text , class: "btn btn-primary form-control" %>
+<% end %>

@@ -1,0 +1,36 @@
+<% provide(:title, "New Allotment") %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <main class="page-body">
+      <%= render 'shared/heading' %>
+
+      <%= form_for @allotment do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <div class="form-group">
+          <%= f.label :user_id %>
+
+          <div class="select-attribute">
+            <%= f.collection_select(:user_id, @non_admins, :id, :name, include_blank: '--Not Allocated--') %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :item_id %>
+
+          <div class="select-attribute">
+            <%= f.collection_select(:item_id, Item.all, :id, :item_display_name, include_blank: '--Not Allocated--') %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :allotment_quantity, "New Allotment quantity" %>
+          <%= f.number_field :allotment_quantity, min: 0, max: 1000, class: 'form-control' %>
+        </div>
+
+        <%= f.submit "Allot Item to User" , class: "btn btn-primary form-control" %>
+      <% end %>
+    </main>
+  </div>
+</div>

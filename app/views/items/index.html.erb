@@ -1,0 +1,12 @@
+<% provide(:title, 'All Items') %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <% if logged_in? && current_user.admin? %>
+    <%= render 'manage', items: @items %>
+    
+  <% else %>
+    <%= render 'shared/asset_cards', asset_type: 'Item' , assets: @items %>
+  <% end %>
+</main>

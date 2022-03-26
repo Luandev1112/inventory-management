@@ -1,0 +1,22 @@
+<% provide(:title, "New Allotment") %>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <main class="page-body">
+      <%= render 'shared/heading' %>
+
+      <%= render 'shared/details', object: @allotment %>
+
+      <%= form_for @allotment do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <div class="form-group">
+          <%= f.label :allotment_quantity %>
+          <%= f.number_field :allotment_quantity, min: 0, max: 100, class: 'form-control' %>
+        </div>
+
+        <%= f.submit "Update quantity" , class: "btn btn-primary form-control" %>
+      <% end %>
+    </main>
+  </div>
+</div>

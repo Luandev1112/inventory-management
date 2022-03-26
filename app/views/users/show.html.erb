@@ -1,0 +1,33 @@
+<% provide(:title, "User Details : #{@user.name}" + ((@user == current_user) ? " (You)" : "")) %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <%= render 'shared/details', object: @user %>
+
+  <% if logged_in? && ((@user == current_user) || (current_user.admin?))%>
+    <div class="dropdown option-dropdown">
+      <a href="#" class="dropdown-toggle border d-inline btn" data-toggle="dropdown">
+        Options
+      </a>
+
+      <ul class="dropdown-menu user-menu">
+        <li>
+          <%= link_to "Edit credentials", edit_user_path(@user) if @user == current_user  %>
+        </li>
+
+        <li>
+          <%= link_to "Change password", changepassword_user_path(@user) if @user == current_user  %>
+        </li>
+
+        <li>
+          <%= link_to "Allotment history", currentallotments_user_path if current_user.admin? %>
+        </li>
+
+        <li>
+          <%= link_to "Delete", @item, method: :delete, data: { confirm: "You sure?" } if (current_user.admin?) && (@user != current_user) %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+</main>

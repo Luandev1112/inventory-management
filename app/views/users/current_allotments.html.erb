@@ -1,0 +1,50 @@
+<% provide(:title, (@user == current_user ? 'Your' : @user.name + "'s") + ' Current Allotments') %>
+
+<main class="page-body">
+  <%= render 'shared/heading' %>
+
+  <% if @allotments.blank? %>
+    <div>
+      <%= (@user == current_user ? "You have" : @user.name + " has") %> not currently been alloted any item.
+    </div>
+
+  <% else %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Item
+          </th>
+
+          <th>
+            Alloted at
+          </th>
+
+          <th>
+            Allotment quantity
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @allotments.each do |allotment| %>
+          <% @item = get_item_by_id allotment.item_id %>
+
+          <tr>
+            <td>
+              <%= item_display_name @item %>
+            </td>
+
+            <td>
+              <%= allotment.created_at %>
+            </td>
+
+            <td class="count">
+              <%= allotment.allotment_quantity %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</main>
